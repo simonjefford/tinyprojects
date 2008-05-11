@@ -54,8 +54,6 @@ if !options[:account]
   raise "No account was found either in .git config or on the command line (see gil --help)"
 end
 
-puts options.inspect
-
 require File.dirname(__FILE__) + '/lighthouse'
 include Lighthouse
 
