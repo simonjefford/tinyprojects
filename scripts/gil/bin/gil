@@ -1,0 +1,20 @@
+#!/usr/bin/ruby
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "../lib"))
+require 'gil'
+require 'lighthouse'
+include Lighthouse
+require 'optparse'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: gil revision [options]\n"
+end.parse!
+
+rev = ARGV[0]
+
+gil = Gil.new(options)
+tickets = gil.summarise_commits(rev)
+tickets.each do |t|
+  puts "##{t.number} - #{t.title}"
+end
