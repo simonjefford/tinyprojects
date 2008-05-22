@@ -13,9 +13,9 @@ describe "Gil" do
   it "should use the ERB Formatter when passed a template file" do
     mockformatter = mock("ERBFormatter")
     fixture_path = get_fixture_path("simpletemplate.erb")
-    mockformatter.should_receive(:format).with(:template_path => fixture_path)
+    mockformatter.should_receive(:format).with(:templatepath => fixture_path)
     ERBFormatter.should_receive(:new).and_return(mockformatter)
-    g = Gil.new(:template_path => fixture_path)
+    g = Gil.new(:templatepath => fixture_path)
     g.summarise_commits
   end
 

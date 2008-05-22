@@ -8,9 +8,9 @@ options = {}
 
 OptionParser.new do |opts|
   opts.banner = "Usage: gil revision [options]\n"
-  opts.on("-e", "--template ERB_TEMPLATE_PATH", :REQUIRED,
+  opts.on("-e", "--templatepath ERB_TEMPLATE_PATH", :REQUIRED,
           "An erb template to use to format the output") do |template|
-    options[:template] = template
+    options[:templatepath] = template
   end
 end.parse!
 

@@ -19,11 +19,11 @@ end
 
 class ERBFormatter < Formatter
   def format(options = {})
-    template_path = options[:template_path]
+    template_path = options[:templatepath]
     template = options[:template]
     raise "Need a template to render using ERB" unless template_path || template
     raise "You need to pass either a template path or a template string" if template_path && template
-    if options[:template_path]
+    if options[:templatepath]
       template = File.read(template_path)
     end
     result = ERB.new(template, nil, "-").result(binding)

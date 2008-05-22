@@ -92,9 +92,9 @@ class Gil
 private
   def format(tickets)
     formatteroptions = {}
-    if @options[:template_path]
+    if @options[:templatepath]
       formatter_klass = ERBFormatter
-      formatteroptions[:template_path] = @options[:template_path]
+      formatteroptions[:templatepath] = @options[:templatepath]
     else
       formatter_klass = PlainFormatter
     end

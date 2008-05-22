@@ -45,7 +45,7 @@ describe "ERB Formatter" do
   it "should require either a template path or a template string - not both" do
     f = ERBFormatter.new(@tickets)
     lambda {
-      f.format(:template_path => ".", :template => "mytemplate")
+      f.format(:templatepath => ".", :template => "mytemplate")
     }.should raise_error(RuntimeError, "You need to pass either a template path or a template string")
   end
 
@@ -65,7 +65,7 @@ describe "ERB Formatter" do
   it "should read the template from a file when passed the template_path option" do
     f = ERBFormatter.new(@tickets)
     template_path = get_fixture_path("simpletemplate.erb")
-    formatted = f.format(:template_path => template_path).split("\n")
+    formatted = f.format(:templatepath => template_path).split("\n")
     formatted[0].should == "#1 - The first ticket"
     formatted[1].should == "#2 - The second ticket"
   end
