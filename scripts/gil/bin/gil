@@ -16,8 +16,4 @@ end.parse!
 
 rev = ARGV[0]
 gil = Gil.new(options)
-tickets = gil.summarise_commits(rev)
-
-tickets.each do |t|
-  puts "##{t.number} - #{t.title}"
-end
+puts gil.summarise_commits(rev)

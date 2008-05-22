@@ -77,17 +77,30 @@ private
 end
 
 class Gil
-  def initialize
+  def initialize(options = {})
     @lighthouse = LighthouseProject.new
+    @options = options
   end
 
-  def summarise_commits(rev)
+  def summarise_commits(rev = nil)
     logentries = Git.get_log_entries(rev)
     ticketnumbers = logentries.map { |entry| find_ticket_number(entry) }.compact.uniq
-    @lighthouse.get_tickets(ticketnumbers)
+    tickets = @lighthouse.get_tickets(ticketnumbers)
+    format(tickets)
   end
 
 private
+  def format(tickets)
+    formatteroptions = {}
+    if @options[:template_path]
+      formatter_klass = ERBFormatter
+      formatteroptions[:template_path] = @options[:template_path]
+    else
+      formatter_klass = PlainFormatter
+    end
+    formatter_klass.new(tickets).format(formatteroptions)
+  end
+
   def find_ticket_number(logentry)
     re = /\[\#(\d+).*state:resolved.*\]/
     match = re.match(logentry)
