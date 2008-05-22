@@ -1,14 +1,6 @@
 class LighthouseProject
   def initialize
     validate_state
-    Lighthouse.account = account
-    Lighthouse.token = token
-
-    if File.exist?(cache_file_name)
-      @ticket_cache = YAML.load_file(cache_file_name)
-    else
-      @ticket_cache = {}
-    end
   end
 
   def project
@@ -24,6 +16,8 @@ class LighthouseProject
   end
 
   def get_tickets(ticketnumbers)
+    init_cache
+    init_lighthouse
     ticketnumbers.map do |ticket_num|
       ticket = @ticket_cache[ticket_num]
       if (!ticket)
@@ -41,6 +35,19 @@ private
     File.open(cache_file_name, "w") do |cache_file|
       YAML.dump(@ticket_cache, cache_file)
     end
+  end
+
+  def init_cache
+    if File.exist?(cache_file_name)
+      @ticket_cache = YAML.load_file(cache_file_name)
+    else
+      @ticket_cache = {}
+    end
+  end
+
+  def init_lighthouse
+    Lighthouse.account = account
+    Lighthouse.token = token
   end
 
   def cache_file_name
