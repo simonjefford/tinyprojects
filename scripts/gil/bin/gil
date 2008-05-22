@@ -1,7 +1,6 @@
 #!/usr/bin/ruby
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "../lib"))
-require 'gil'
-require 'lighthouse'
+require File.dirname(__FILE__) + '/../lib/gil'
+
 include Lighthouse
 require 'optparse'
 
@@ -9,12 +8,16 @@ options = {}
 
 OptionParser.new do |opts|
   opts.banner = "Usage: gil revision [options]\n"
+  opts.on("-e", "--template ERB_TEMPLATE_PATH", :REQUIRED,
+          "An erb template to use to format the output") do |template|
+    options[:template] = template
+  end
 end.parse!
 
 rev = ARGV[0]
-
 gil = Gil.new(options)
 tickets = gil.summarise_commits(rev)
+
 tickets.each do |t|
   puts "##{t.number} - #{t.title}"
 end
