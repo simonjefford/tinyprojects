@@ -13,8 +13,7 @@ class Git
 end
 
 class LighthouseProject
-  def initialize(options)
-    @options = options
+  def initialize
     validate_state
     Lighthouse.account = account
     Lighthouse.token = token
@@ -78,8 +77,8 @@ private
 end
 
 class Gil
-  def initialize(options)
-    @lighthouse = LighthouseProject.new(options)
+  def initialize
+    @lighthouse = LighthouseProject.new
   end
 
   def summarise_commits(rev)
