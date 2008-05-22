@@ -1,12 +1,15 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe "LighthouseProject" do
-  it "should use the Git class to verify the lighthouse account information when constructed" do
-    Git.should_receive(:get_config_value).with("gil.account").and_return("account")
-    Git.should_receive(:get_config_value).with("gil.project").and_return("11111")
-    Git.should_receive(:get_config_value).with("gil.token").and_return("token")
-    LighthouseProject.new
+module LighthouseProjectSpecHelpers
+  def mock_succesful_git_config
+    Git.stub!(:get_config_value).with("gil.account").and_return("account")
+    Git.stub!(:get_config_value).with("gil.project").and_return("11111")
+    Git.stub!(:get_config_value).with("gil.token").and_return("token")
   end
+end
+
+describe "LighthouseProject - initialisation" do
+  include LighthouseProjectSpecHelpers
 
   it "should complain if no account could be found" do
     Git.should_receive(:get_config_value).with("gil.account").and_return("")
@@ -28,4 +31,13 @@ describe "LighthouseProject" do
     Git.should_receive(:get_config_value).with("gil.token").and_return("")
     lambda { LighthouseProject.new }.should raise_error(RuntimeError, "No token was found in .git config.")
   end
+
+  it "should instantiate a TicketCache instance" do
+    mock_succesful_git_config
+    TicketCache.should_receive(:new)
+    LighthouseProject.new
+  end
+end
+
+describe "LighthouseProject - ticket fetching" do
 end

@@ -1,6 +1,7 @@
 class LighthouseProject
   def initialize
     validate_state
+    init_cache
   end
 
   def project
@@ -38,6 +39,7 @@ private
   end
 
   def init_cache
+    @cache = TicketCache.new
     if File.exist?(cache_file_name)
       @ticket_cache = YAML.load_file(cache_file_name)
     else
