@@ -64,7 +64,7 @@ describe "ERB Formatter" do
 
   it "should read the template from a file when passed the template_path option" do
     f = ERBFormatter.new(@tickets)
-    template_path = File.dirname(__FILE__) + '/../fixtures/simpletemplate.erb'
+    template_path = get_fixture_path("simpletemplate.erb")
     formatted = f.format(:template_path => template_path).split("\n")
     formatted[0].should == "#1 - The first ticket"
     formatted[1].should == "#2 - The second ticket"
