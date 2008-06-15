@@ -40,4 +40,5 @@ describe "LighthouseProject - initialisation" do
 end
 
 describe "LighthouseProject - ticket fetching" do
+  it "should have some specs"
 end
