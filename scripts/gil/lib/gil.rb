@@ -3,3 +3,4 @@ require 'gil/gil'
 require 'gil/lighthouse'
 require 'gil/formatters'
 require 'gil/lighthouse_project'
+include Lighthouse
