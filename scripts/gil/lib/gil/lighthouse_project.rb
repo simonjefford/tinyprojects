@@ -2,6 +2,7 @@ class LighthouseProject
   def initialize
     validate_state
     init_cache
+    init_lighthouse
   end
 
   def project
@@ -17,8 +18,6 @@ class LighthouseProject
   end
 
   def get_tickets(ticketnumbers)
-    init_cache
-    init_lighthouse
     ticketnumbers.map do |ticket_num|
       ticket = @ticket_cache[ticket_num]
       if (!ticket)
