@@ -31,12 +31,6 @@ describe "LighthouseProject - initialisation" do
     Git.should_receive(:get_config_value).with("gil.token").and_return("")
     lambda { LighthouseProject.new }.should raise_error(RuntimeError, "No token was found in .git config.")
   end
-
-  it "should instantiate a TicketCache instance" do
-    mock_succesful_git_config
-    TicketCache.should_receive(:new)
-    LighthouseProject.new
-  end
 end
 
 describe "LighthouseProject - ticket fetching" do
