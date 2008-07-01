@@ -9,8 +9,6 @@ module LighthouseProjectSpecHelpers
 end
 
 describe "LighthouseProject - initialisation" do
-  include LighthouseProjectSpecHelpers
-
   it "should complain if no account could be found" do
     Git.should_receive(:get_config_value).with("gil.account").and_return("")
     Git.should_receive(:get_config_value).with("gil.project").any_number_of_times.and_return("11111")
