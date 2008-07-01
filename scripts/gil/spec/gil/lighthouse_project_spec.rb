@@ -32,5 +32,12 @@ describe "LighthouseProject - initialisation" do
 end
 
 describe "LighthouseProject - ticket fetching" do
-  it "should have some specs"
+  include LighthouseProjectSpecHelpers
+
+  it "should have use the lighthouse api to find a ticket in the configured project" do
+    mock_succesful_git_config
+    l = LighthouseProject.new
+    Ticket.should_receive(:find).with(1, :params => {:project_id => "11111"})
+    l.get_tickets([1])
+  end
 end
